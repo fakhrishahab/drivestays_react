@@ -3,13 +3,25 @@ var gulp 	= require('gulp'),
 	plumber = require('gulp-plumber'),
 	browserify = require('gulp-browserify'),
 	reactify = require('reactify'),
-	server 	= require('./server');
+	server 	= require('./server'),
+	browserify = require('browserify'),
+	source 	= require('vinyl-source-stream'),
+	fs 		= require('fs');
 
 gulp.task('script', function(){
-	gulp.src('./dev/script/**/*.*')
-		.pipe(plumber())
-		.pipe(browserify({ transform : 'reactify', debug: true }))
-		.pipe(gulp.dest('public/script'))
+	// console.log(fs.readdirSync('./dev/script/app'))
+	fs.readdirSync('./dev/script/app').forEach(function(item){
+		console.log('./dev/script/app/'+item, item)
+		return browserify('./dev/script/app/'+item).transform(reactify)
+			.bundle()
+			.pipe(source(item))
+			.pipe(gulp.dest('public/script/app'))
+		// console.log(item)
+	})
+	// gulp.src('./dev/script/**/*.*')
+	// 	.pipe(plumber())
+	// 	.pipe(browserify({ transform : 'reactify', debug: true }))
+	// 	.pipe(gulp.dest('public/script'))
 })
 
 gulp.task('fonts', function(){

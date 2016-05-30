@@ -19,8 +19,11 @@
     "ejs": "^2.4.2",
     "es6-promise": "^3.2.1",
     "express": "^4.13.4",
+    "fs": "0.0.2",
     "object-assign": "^4.1.0",
     "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.1.0",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
